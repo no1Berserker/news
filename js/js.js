@@ -5,6 +5,77 @@ $(function(){
         zz_03: /(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/
     };
     
+    var news_data = [
+        {
+            classify: 1,
+            tit: '津塔纯钢塔剪力墙，记说能承受2500年一遇的地震？', src_01: 'img/news_01.png', 
+            src_02: 'img/news_02.png', 
+            src_03: 'img/news_03.png'
+        },{
+            classify: 0,
+            tit: '习近平在这里提出“绿水青山就是金山银山”', 
+            src_01: 'img/news_04.png'
+        },{
+            classify: 0,
+            tit: '习近平在这里提出“绿水青山就是金山银山”', 
+            src_01: 'img/news_04.png'
+        },{
+            classify: 0,
+            tit: '习近平在这里提出“绿水青山就是金山银山”', 
+            src_01: 'img/news_04.png'
+        },{
+            classify: 1,
+            tit: '津塔纯钢塔剪力墙，记说能承受2500年一遇的地震？', src_01: 'img/news_01.png', 
+            src_02: 'img/news_02.png', 
+            src_03: 'img/news_03.png'
+        },{
+            classify: 0,
+            tit: '习近平在这里提出“绿水青山就是金山银山”', 
+            src_01: 'img/news_04.png'
+        },{
+            classify: 0,
+            tit: '习近平在这里提出“绿水青山就是金山银山”', 
+            src_01: 'img/news_04.png'
+        },{
+            classify: 0,
+            tit: '习近平在这里提出“绿水青山就是金山银山”', 
+            src_01: 'img/news_04.png'
+        },{
+            classify: 0,
+            tit: '习近平在这里提出“绿水青山就是金山银山”', 
+            src_01: 'img/news_04.png'
+        }
+    ];
+    
+    function append_news(json){
+        if(json.classify == 1){
+            var news_01 =  '<div class="home-con">' +
+                                '<p class="home-news">'+json.tit+'</p>' +
+                                '<ul class="home-news-pics">' +
+                                    '<li><img src="'+json.src_01+'" width="100%" alt=""></li>' + 
+                                    '<li><img src="'+json.src_02+'" width="100%" alt=""></li>' +
+                                    '<li><img src="'+json.src_03+'" width="100%" alt=""></li>' +
+                                '</ul>' +
+                                '<div class="home-news-tips">新闻热点</div>' +
+                                '<div class="home-news-tips h">2982跟帖<a href="">&#xe62a;</a></div>' +
+                            '</div>';
+            return news_01;
+        }else if(json.classify == 0){
+            var news_02 =  '<div class="home-con">' +
+                                '<div class="home-news-pic">' +
+                                    '<img src="'+json.src_01+'" width="100%" alt="">' +
+                                '</div>' +
+                                '<p class="home-news h">' + json.tit +
+                                    '<div class="home-news-tips h">1982跟帖<a href="">&#xe62a;</a></div>' +
+                                '</p>' + 
+                            '</div>';
+            return news_02;   
+        };
+    };
+    
+    $.each(news_data, function(key, val){
+         $('.home-cons').append(append_news(val));
+    });
     
     $('.register-mail-stuffix').click(function(){
         $('.cover').fadeIn();
@@ -73,13 +144,43 @@ $(function(){
         }
     });
     
-    $('.login-submit').click(function(){
+    $('.login-inp-pwd, .login-inp-name').on('input change', function(){
         if($('.login-inp-pwd').val() != '' && $('.login-inp-name').val() != ''){
-            $(this).addClass('h');
+            $('.login-submit').addClass('h');
         }else {
-            $(this).removeClass('h');
+            $('.login-submit').removeClass('h');
         }
     });
+    
+    $('.login-submit').click(function(e){
+        if($('.login-inp-pwd').val() == '' || $('.login-inp-name').val() == ''){
+            e.preventDefault();
+        }
+    });
+    
+    $('.home-login-close').click(function(){
+        $('.home-login').hide();
+    });
+    
+    var dis = 1;
+    $('.pull-down.h').click(function(){
+        if(dis == 1){
+            $(this).html('&#xe633;');
+            $('.password').prop('type', 'text');
+            dis = 0;
+        }else {
+            $(this).html('&#xe631;');
+            $('.password').prop('type', 'password');
+            dis = 1;
+        }
+        
+    });
+    
+    
+    
+    
+    
+    
     
     
     
